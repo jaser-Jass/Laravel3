@@ -1,15 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Employee;
+use App\Http\Controllers\EmployeeController;
 
-Route::get('/test_database', function () {
-    $employee = new Employee();
-    $employee->name = 'Пётр Иванович Петров';
-    $employee->position = 'Директор';
-    $employee->email = 'petrpetrov@example.com';
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 
-    $employee->save();
-
-    return "Новый сотрудник успешно добавлен!";
-});
